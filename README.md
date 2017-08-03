@@ -90,7 +90,7 @@ make_openapi("your-project-id")
 
 ([issue raised with plumber](https://github.com/trestletech/plumber/issues/154) to see if this can be handled by the library)
 
-1.  Deploy the openapi.yaml in terminal via `gcloud service-management deploy openapi.yaml --project mark-edmondson-usa`
+1.  Deploy the openapi.yaml in terminal via `gcloud service-management deploy openapi.yaml --project your-project`
 2.  Run `gcloud service-management configs list --service=example-project.appspot.com` to see the service management name and config you just uploaded
 3.  Add these lines to the `app.yaml` of the app engine to include the info you got from the listing:
 
