@@ -1,0 +1,18 @@
+swagger: '2.0'
+info:
+  description: API Description
+  title: API Title
+  version: 1.0.0
+host: mark-edmondson-usa.appspot.com
+schemes: [http]
+produces: [application/json]
+paths:
+  /demoR:
+    get:
+      summary: ''
+      responses:
+        default:
+          description: Default response.
+      parameters: []
+      operationId: demoR
+
