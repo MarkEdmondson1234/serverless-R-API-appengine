@@ -134,9 +134,11 @@ You can now play around with Cloud endpoints features by modifying the configura
 ## Pricing
 
 * Cloud Endpoints: 0-2Million calls - Free, 2M+ - $3 per million API calls
-* App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing#flexible-environment-instances) - depends largely on how many instances you spawn per X connections.  For example, if you ran the default auto scaling with the [default resources](https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml#resource-settings) (2 instances with 1 CPU core, 0.6GB) and you have enough API traffic for 24 hours of constant API useage, it will cost [$2.73 per day](https://cloud.google.com/products/calculator/#id=44336162-27f9-41b7-94a4-73036357e6d6)
+* App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing#flexible-environment-instances) - depends largely on how many instances you spawn per X connections.  For example, if you ran the default auto scaling with the [default resources](https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml#resource-settings) (2 instances with 1 CPU core, 0.6GB) and you have enough API traffic for 24 hours of constant API useage, it will cost [$2.73 per day](https://cloud.google.com/products/calculator/#id=44336162-27f9-41b7-94a4-73036357e6d6).  
 
-The automatic scaling options will be the largest determination of cost.  Use the monitoring to get the latency of the API and configure the `app.yaml` accordingly to get the performance you require, which will determine when extra instances are launched running your R code underneath.
+If you have peaks of traffic that spawn more instances then idle periods, its the total number of instance hours that count (e.g. a peak of one hour that launches 24 instances will cost the same as 24 hours with constant traffic that needs only one instance.)
+
+The automatic scaling and resources of each instance will be the largest determination of cost.  Use the monitoring to get the latency of the API and configure the `app.yaml` accordingly to get the performance you require, which will determine when extra instances are launched running your R code underneath.
 
 Make sure to put billing alerts and maximum spend on your app engine to avoid big charges, I typically put a $1 a day limit on App Engine when testing just to make sure nothing huge can go wrong with a misconfiguration of something.  
 
