@@ -125,6 +125,7 @@ You should now see monitoring and logs
 
 You can now play around with Cloud endpoints features by modifying the configuration files.  
 
+- [Alter automatic scaling](https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml#automatic_scaling) to determine when and how to launch new instances to cover traffic.
 - [Restrict access](https://cloud.google.com/endpoints/docs/api-access-overview) via roles, API keys, OAuth2 etc. 
 - [Publicise the API](https://cloud.google.com/endpoints/docs/control-api-callers) so other users can use it in their own projects
 - [Generate Client library bundles in Java or python](https://cloud.google.com/endpoints/docs/frameworks/python/gen_clients)
