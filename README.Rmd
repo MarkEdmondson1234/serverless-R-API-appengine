@@ -9,7 +9,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-R + containerit + Google Build triggers + GitHub + Plumber + Swagger (OpenAPI) + App Engine + Google Cloud Endpoints = a serverless, scalable R API, that can be called by non-R SDKs, built in OAuth2 and auth keys and monitoring 
+R + Docker + containerit + Google Build triggers + GitHub + Plumber + Swagger (OpenAPI) + Flexible App Engine + Google Cloud Endpoints = a serverless, scalable R API, that can be called by non-R SDKs, built in OAuth2 and auth keys and monitoring 
 
 ## Deploy to App Engine
 
@@ -20,11 +20,11 @@ Below is taken from the guide [here](demoDockerAppEngine/README.md), which has m
 1. Create a plumber R script with endpoints for your R code
 2. Use `library(containerit)` to create a Dockerfile of the dependents your R code needs
 3. Alter the generated Dockerfile so it works on App Engine as [detailed there](demoDockerAppEngine/README.md)
-4. You can use `FROM gcr.io/gcer-public/plumber-appengine` to speed up build times as its preinstalled plumber
+4. You can use `FROM gcr.io/gcer-public/plumber-appengine` to speed up build times as its preinstalled plumber.  It also has `googleCloudStorageR` so you can call data into your scripts, but in those cases you will need to also supply an auth.json
 
-This is a [publicly built Docker image](https://cloudyr.github.io/googleComputeEngineR/articles/docker.html#public-docker-images) from the `googleComputeEngineR` project.
+`gcr.io/gcer-public/plumber-appengine` is a [publicly built Docker image](https://cloudyr.github.io/googleComputeEngineR/articles/docker.html#public-docker-images) from the `googleComputeEngineR` project, but you can make your own private one if you like and use [Build Triggers](https://cloud.google.com/container-builder/docs/how-to/build-triggers) to create it. 
 
-In that case, the Dockerfile is much simpler:
+In any case, the Dockerfile is much simpler:
 
 ```
 FROM gcr.io/gcer-public/plumber-appengine
@@ -44,7 +44,7 @@ COPY [".", "./"]
 CMD ["api.R"]
 ```
 
-4. Configure App Engines app.yaml 
+4. Configure App Engine's `app.yaml`
 
 Example:
 
@@ -55,7 +55,8 @@ env: flex
 env_variables:
   GCS_AUTH_FILE: auth.json
 ```
-You will need to include your own `auth.json` service JSON key from your Google Cloud project in the folder you upload.
+
+If using `googleCloudStorgaeR` in your script, you will need to include your own `auth.json` service JSON key from your Google Cloud project in the folder you upload.
 
 5. Upload to a USA based App Engine via `gcloud app deploy --project your-project`
 6. Your R code is now deployed as a Plumber app https://your-project.appspot.com/
