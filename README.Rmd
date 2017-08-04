@@ -128,7 +128,7 @@ You can now play around with Cloud endpoints features by modifying the configura
 - [Restrict access](https://cloud.google.com/endpoints/docs/api-access-overview) via roles, API keys, OAuth2 etc. 
 - [Publicise the API](https://cloud.google.com/endpoints/docs/control-api-callers) so other users can use it in their own projects
 - [Generate Client library bundles in Java or python](https://cloud.google.com/endpoints/docs/frameworks/python/gen_clients)
-
+- [Integrate R endpoints with other endpoints written in different langauges](https://cloudplatform.googleblog.com/2016/06/creating-a-scalable-API-with-microservices.html)
 
 ## Pricing
 
