@@ -3,7 +3,7 @@ Creating a serverless R API on Google Cloud Platform
 Mark Edmondson
 8/3/2017
 
-R + Docker + containerit + Google Build triggers + GitHub + Plumber + Swagger (OpenAPI) + Flexible App Engine + Google Cloud Endpoints = a serverless, scalable R API, that can be called by non-R SDKs, built in OAuth2 and auth keys and monitoring
+R + Docker + containerit + Google Build triggers + GitHub + Plumber + Swagger (OpenAPI) + Flexible Custom runtime App Engine + Google Cloud Endpoints = a serverless, scalable R API, that can be called by non-R SDKs, built in OAuth2 and auth keys and monitoring
 
 Deploy to App Engine
 --------------------
@@ -129,7 +129,7 @@ Pricing
 -------
 
 -   Cloud Endpoints: 0-2Million calls - Free, 2M+ - $3 per million API calls
--   App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing#flexible-environment-instances) - depends largely on how many instances you spawn per X connections.
+-   App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing#flexible-environment-instances) - depends largely on how many instances you spawn per X connections. For example, if you ran the default auto scaling with the [default resources](https://cloud.google.com/appengine/docs/flexible/nodejs/configuring-your-app-with-app-yaml#resource-settings) (2 instances with 1 CPU core, 0.6GB) and you have enough API traffic for 24 hours of constant API useage, it will cost [$2.73 per day](https://cloud.google.com/products/calculator/#id=44336162-27f9-41b7-94a4-73036357e6d6)
 
 The automatic scaling options will be the largest determination of cost. Use the monitoring to get the latency of the API and configure the `app.yaml` accordingly to get the performance you require, which will determine when extra instances are launched running your R code underneath.
 
