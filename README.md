@@ -129,7 +129,7 @@ Pricing
 -------
 
 -   Cloud Endpoints: 0-2Million calls - Free, 2M+ - $3 per million API calls
--   App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing) - depends largely on how many instances you spawn per X connections.
+-   App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing#flexible-environment-instances) - depends largely on how many instances you spawn per X connections.
 
 The automatic scaling options will be the largest determination of cost. Use the monitoring to get the latency of the API and configure the `app.yaml` accordingly to get the performance you require, which will determine when extra instances are launched running your R code underneath.
 
