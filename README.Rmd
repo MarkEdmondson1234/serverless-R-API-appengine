@@ -67,7 +67,7 @@ The App Engine is now up and running with your plumber powered R API.  It will a
 
 We now enable Google Cloud Endpoints [following this guide](https://cloud.google.com/endpoints/docs/get-started-app-engine#deploy_configuration).
 
-6. Plumber generates a swagger.json file that is available at https://your-project.appspot.com/swagger.json
+6. Plumber generates a swagger.json file that is available at `https://your-project.appspot.com/swagger.json` or if you run it locally via `http://127.0.0.1:8080/swagger.json`
 7. Run the function below to generate the openapi.yaml for Google cloud endpoints
 
 ```r
@@ -109,6 +109,8 @@ endpoints_api_service:
 ```
 
 Save, deploy the app again via `gcloud app deploy --project your-project`
+
+Once deployed the `/swagger.json` won't be available as its not in the API spec. 
 
 ### Check it
 
