@@ -20,7 +20,7 @@ Below is taken from the guide [here](demoDockerAppEngine/README.md), which has m
 1. Create a plumber R script with endpoints for your R code
 2. Use `library(containerit)` to create a Dockerfile of the dependents your R code needs
 3. Alter the generated Dockerfile so it works on App Engine as [detailed there](demoDockerAppEngine/README.md)
-4. You can use `FROM gcr.io/gcer-public/plumber-appengine` to speed up build times as its preinstalled plumber.  It also has `googleCloudStorageR` so you can call data into your scripts, but in those cases you will need to also supply an auth.json
+4. You can use `FROM gcr.io/gcer-public/plumber-appengine` to speed up build times as its preinstalled plumber.  It also has [`googleCloudStorageR`](https://github.com/cloudyr/googleCloudStorageR) so you can call data into your scripts, but in those cases you will need to also supply an auth.json
 
 `gcr.io/gcer-public/plumber-appengine` is a [publicly built Docker image](https://cloudyr.github.io/googleComputeEngineR/articles/docker.html#public-docker-images) from the `googleComputeEngineR` project, but you can make your own private one if you like and use [Build Triggers](https://cloud.google.com/container-builder/docs/how-to/build-triggers) to create it. 
 
@@ -56,7 +56,7 @@ env_variables:
   GCS_AUTH_FILE: auth.json
 ```
 
-If using `googleCloudStorgaeR` in your script, you will need to include your own `auth.json` service JSON key from your Google Cloud project in the folder you upload.
+If using `googleCloudStorageR` in your script, you will need to include your own `auth.json` service JSON key from your Google Cloud project in the folder you upload.
 
 5. Upload to a USA based App Engine via `gcloud app deploy --project your-project`
 6. Your R code is now deployed as a Plumber app https://your-project.appspot.com/
@@ -96,8 +96,8 @@ make_openapi("your-project-id")
 ```
 ([issue raised with plumber](https://github.com/trestletech/plumber/issues/154) to see if this can be handled by the library)
 
-8. Deploy the openapi.yaml in terminal via `gcloud service-management deploy openapi.yaml --project mark-edmondson-usa`
-9. Run `gcloud service-management configs list --service=example-project.appspot.com` to see the service management name and config you just uploaded
+8. Deploy the openapi.yaml in terminal via `gcloud service-management deploy openapi.yaml --project your-project`
+9. Run `gcloud service-management configs list --service=your-project.appspot.com` to see the service management name and config you just uploaded
 10. Add these lines to the `app.yaml` of the app engine to include the info you got from the listing:
 
 ```
@@ -133,10 +133,11 @@ You can now play around with Cloud endpoints features by modifying the configura
 
 ## Pricing
 
-* 0-2Million calls - Free
-* 2M+ - $3 per million API calls
-* Plus [Flexible App engine pricing](https://cloud.google.com/appengine/pricing)
+* Cloud Endpoints: 0-2Million calls - Free, 2M+ - $3 per million API calls
+* App Engine costs - [Flexible App engine pricing](https://cloud.google.com/appengine/pricing) - depends largely on how many instances you spawn per X connections.
 
-Make sure to put billing alerts and maximum spend on your app engine to avoid big charges
+The automatic scaling options will be the largest determination of cost.  Use the monitoring to get the latency of the API and configure the `app.yaml` accordingly to get the performance you require, which will determine when extra instances are launched running your R code underneath.
+
+Make sure to put billing alerts and maximum spend on your app engine to avoid big charges, I typically put a $1 a day limit on App Engine when testing just to make sure nothing huge can go wrong with a misconfiguration of something.  
 
 
